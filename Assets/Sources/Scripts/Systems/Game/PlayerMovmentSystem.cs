@@ -4,14 +4,24 @@ using DG.Tweening;
 
 public class PlayerMovmentSystem : GameSystem
 {
-    public override void OnLateUpdate()
-    {
-        if (game.CellToMove == null)
-            return;
+    [SerializeField] private PathBuilderSystem pathBuilderSystem;
 
-        if (game.SwipeDirection != Vector2.zero)
-        {
-            game.PlayerTransform.DOMove(new Vector3(game.CellToMove.transform.position.x, game.CellToMove.transform.position.y), 2f);
-        }
+    Sequence sequence = DOTween.Sequence();
+
+    private float movementSpeed => .1f * game.TravelDistance;
+
+    public override void OnInit()
+    {
+        Sequence sequence = DOTween.Sequence();
+
+        pathBuilderSystem.AAA += MoveTo;
+    }
+
+    private void MoveTo(Vector3 point)
+    {
+        game.IsPlayerMoving = true;
+
+        sequence.Append(game.PlayerTransform.DOMove(point, movementSpeed).
+            OnComplete(() => game.IsPlayerMoving = false));
     }
 }

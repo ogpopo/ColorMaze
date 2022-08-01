@@ -17,5 +17,7 @@ namespace Kuhpik
         // [BoxGroup("currency")] public int money;
 
         public int Level;
+
+        public Vector3 offset;
     }
 }

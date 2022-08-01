@@ -1,48 +1,38 @@
 using Kuhpik;
 using NaughtyAttributes;
+using System;
 using UnityEngine;
 
 public class PathBuilderSystem : GameSystem
 {
-    [SerializeField] [Tag] private string cellTag;
+    [SerializeField] [Tag] private string wallTag;
+
+    [SerializeField] private LayerMask EmptyLayer;
+
+    public event Action<Vector3> AAA;
 
     public override void OnUpdate()
     {
-        GameObject selectedTile;
-
         if (game.SwipeDirection != Vector2.zero)
         {
-            game.CellToMove = null;
-
             RaycastHit hit;
 
-            if (Physics.Raycast(game.CurrentCell.position, new Vector3(game.SwipeDirection.x, game.SwipeDirection.y, 0), out hit))
+            if (Physics.Raycast(game.PlayerTransform.position, new Vector3(game.SwipeDirection.x, 0, game.SwipeDirection.y), out hit, 30, EmptyLayer))
             {
-                selectedTile = hit.transform.gameObject;
+                var positionForMove = hit.transform.position - new Vector3(game.SwipeDirection.x, 0 , game.SwipeDirection.y);
 
-                if (!CheckingForCell(selectedTile))
+                game.TravelDistance = positionForMove.magnitude;
+
+                if (!CheckingForHittingWall(hit))
                     return;
-                print(game.SwipeDirection);
 
-                print("444");
-                if (Physics.Raycast(selectedTile.transform.position, new Vector3(game.SwipeDirection.x, game.SwipeDirection.y, 0), out hit))
-                {
-                    print("555");
-                    if (CheckingForCell(hit.transform.gameObject))
-                    {
-                        print("666");
-                        game.CellToMove = selectedTile.transform;
-                    }
-
-                    selectedTile = hit.transform.gameObject;
-                }
-
+                AAA?.Invoke(positionForMove);
             }
         }
     }
 
-    private bool CheckingForCell(GameObject cellForCheck)
+    private bool CheckingForHittingWall(RaycastHit cellForCheck)
     {
-        return cellForCheck.CompareTag(cellTag);
+        return cellForCheck.transform.CompareTag(wallTag);
     }
 }

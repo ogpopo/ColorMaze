@@ -16,19 +16,31 @@ public class PlayerInputSystem : GameSystem
     {
         game.SwipeDirection = Vector2.zero;
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || game.IsPlayerMoving)
         {
             firstTouchPosition = Input.mousePosition;
         }
 
         else if (Input.GetMouseButtonUp(0))
         {
-            Vector2 direction = new Vector2(Input.mousePosition.x - firstTouchPosition.x, Input.mousePosition.y - firstTouchPosition.y);
-            print(direction.magnitude);
-            if (direction.magnitude > minDistance)
+            Vector2 direction = new Vector2(Input.mousePosition.x - firstTouchPosition.x, Input.mousePosition.y - firstTouchPosition.y).normalized;
+
+            if (Vector2.Dot(Vector2.up, direction) > .9f)
             {
-                game.SwipeDirection = new Vector2(Mathf.Round(Input.mousePosition.x - firstTouchPosition.x),
-                Mathf.Round(Input.mousePosition.y - firstTouchPosition.y)).normalized;
+                game.SwipeDirection = Vector2.up;
+
+            }
+            else if (Vector2.Dot(Vector2.down, direction) > .9f)
+            {
+                game.SwipeDirection = Vector2.down;
+            }
+            else if (Vector2.Dot(Vector2.left, direction) > .9f)
+            {
+                game.SwipeDirection = Vector2.left;
+            }
+            else if (Vector2.Dot(Vector2.right, direction) > .9f)
+            {
+                game.SwipeDirection = Vector2.right;
             }
         }
     }

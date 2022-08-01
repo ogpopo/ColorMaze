@@ -8,9 +8,5 @@ namespace Kuhpik
         // Example
         // [SerializeField] [BoxGroup("Moving")] private float moveSpeed;
         // public float MoveSpeed => moveSpeed;
-
-        [SerializeField] private int stepLength;
-
-        public int StepLength => stepLength;
     }
 }

@@ -1,25 +1,15 @@
 using UnityEngine;
-using Kuhpik;
+using System;
 
 public class CellTrackerComponent : MonoBehaviour
 {
-    [SerializeField] Bootstrap bootstrap;
+    public event Action<Cell> OnActivationNewCell;
 
-    private void Awake()
+    private void OnTriggerEnter(Collider other)
     {
-        bootstrap = GameObject.FindGameObjectWithTag("Bootstrap").GetComponent<Bootstrap>();
-    }
-
-    private void Update()
-    {
-        RaycastHit hit;
-
-        if (Physics.Raycast(transform.position, Vector3.down, out hit))
+        if (other.gameObject.TryGetComponent(out Cell cell))
         {
-            if (bootstrap.GameData.CurrentCell == hit.transform)
-                return;
-
-            bootstrap.GameData.CurrentCell = hit.transform;
+            OnActivationNewCell?.Invoke(cell);
         }
     }
 }

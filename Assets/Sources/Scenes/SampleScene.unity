@@ -123,6 +123,49 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &109338164
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 109338165}
+  - component: {fileID: 109338166}
+  m_Layer: 0
+  m_Name: HandlerEnemyDeath
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &109338165
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109338164}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 502092829}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &109338166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109338164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11e41c4a9adc4af47a0a69a1a83e32cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &502092828
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,6 +197,8 @@ Transform:
   - {fileID: 1203461450}
   - {fileID: 699640751}
   - {fileID: 2009982418}
+  - {fileID: 109338165}
+  - {fileID: 911197563}
   m_Father: {fileID: 1734576318}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -217,6 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8020048131e1bfe40bb0cb4191475818, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathBuilderSystem: {fileID: 2009982419}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,12 +350,56 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: 2.96, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &911197562
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 911197563}
+  - component: {fileID: 911197564}
+  m_Layer: 0
+  m_Name: CellProcessing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &911197563
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911197562}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 502092829}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &911197564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911197562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c045e197f7aec2448123e96532b6e08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellTracker: {fileID: 4591405601345522072, guid: 8fb38a03695ee5843999579de313a5d5, type: 3}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -749,7 +839,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b01cff822eafcb34fa4f9617c9d6371c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cellTag: Cell
+  wallTag: Wall
+  EmptyLayer:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1 &2038169156
 GameObject:
   m_ObjectHideFlags: 0
@@ -793,5 +886,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd231d657ffe8f946a325cb62f29b085, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTag: Player
   levelsPath: Levels/Level {0}
   maxLevels: 3
+  cellPrefab: {fileID: 5250702603980573448, guid: b4962223109b6e04cae178bbbc728a91, type: 3}
+  backgroundPrefab: {fileID: 5250702603980573448, guid: 3567dcbd08d2d47408eb6b3a2a555988, type: 3}

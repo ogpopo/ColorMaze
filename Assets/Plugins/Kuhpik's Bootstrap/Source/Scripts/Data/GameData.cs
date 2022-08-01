@@ -13,15 +13,22 @@ namespace Kuhpik
         // public float LevelProgress;
         // public Enemy[] Enemies;
 
-        public int FieldHeight;
-        public int FieldWidth;
-
         public GameObject CurrentLevel;
 
         public Transform PlayerTransform;
         public Vector2 SwipeDirection;
 
-        public Transform CurrentCell;
         public Transform CellToMove;
+        public float TravelDistance;
+
+        public bool IsPlayerMoving;
+
+        public int FilledInCellsNumberToWin = 46;
+        public int FilledInCells;
+
+        public Color ColorForPlayer;
+        public Color ColorForBackground;
+        public Color DefaultColorForFloor;
+        public Color ChangedColorForFloor;
     }
 }
