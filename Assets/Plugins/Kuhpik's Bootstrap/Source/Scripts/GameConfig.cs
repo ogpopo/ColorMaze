@@ -8,5 +8,7 @@ namespace Kuhpik
         // Example
         // [SerializeField] [BoxGroup("Moving")] private float moveSpeed;
         // public float MoveSpeed => moveSpeed;
+
+        public float PlayerOffsetFromFloor { get; } = .2f;
     }
 }
